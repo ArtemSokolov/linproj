@@ -2,12 +2,18 @@
 ##
 ## by Artem Sokolov
 
-## Finds the first nz eigenvalues/-vectors of the generalized
-##   eigenvalue problem A x = \lambda B x
-## A and B are assumed to be square
+#' Generalized Symmetric Eigenvalue Problem (GSEP) Solver
+#' 
+#' Finds the first nz eigenvalues/-vectors of the generalized
+#'   eigenvalue problem \eqn{A v = \lambda B v}, where A and B are assumed to be symmetric.
+#'
+#' @param A n-by-n matrix A.
+#' @param B n-by-n matrix B.
+#' @param nz integer indicating the number of eigenvalues /-vectors to obtain. Defaults to n.
+#' @return A list with two elements. $d contains the eignavalues in decreasing order. $v contains the corresponding eigenvectors.
 #' @useDynLib LDA dsygvx_c
 #' @export
-gsep <- function( A, B, nz=min(ncol(A),ncol(B)) )
+gsep <- function( A, B, nz=nrow(A) )
 {
     ## Verify dimensionality
     n <- nrow(A)
