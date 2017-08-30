@@ -34,3 +34,8 @@ vignettes/*.pdf
 
 # Emacs
 *~
+
+# Compiled code
+*.o
+*.so
+

@@ -5,42 +5,28 @@
 ## Finds the first nz eigenvalues/-vectors of the generalized
 ##   eigenvalue problem A x = \lambda B x
 ## A and B are assumed to be square
+#' @useDynLib LDA dsygvx_c
+#' @export
 gsep <- function( A, B, nz=min(ncol(A),ncol(B)) )
 {
-    ## Load LAPACK
-    dyn.load( La_library() )
-    stopifnot( is.loaded( "dsygvx" ) )
-
     ## Verify dimensionality
     n <- nrow(A)
     stopifnot( ncol(A) == n )
     stopifnot( all( dim(B) == c(n,n) ) )
     
-    res <- .Fortran( "dsygvx",
-                    as.integer( 1 ), 		# 1: ITYPE
-                    as.character( 'V' ),	# 2: JOBZ
-                    as.character( 'I' ),	# 3: RANGE
-                    as.character( 'U' ),	# 4: UPLO
-                    as.integer( n ),		# 5: N
-                    as.double( A ), 		# 6: A
-                    as.integer( n ),		# 7: LDA
-                    as.double( B ),		# 8: B
-                    as.integer( n ),		# 9: LDB
-                    as.double( 0.0 ),		# 10: VL
-                    as.double( 0.0 ),		# 11: VU
-                    as.integer( n-nz+1 ),	# 12: IL
-                    as.integer( n ),		# 13: IU
-                    as.double( 1e-5 ),		# 14: ABSTOL
-                    M = integer(1),		# 15: M
-                    W = double(n),		# 16: W
-                    Z = double(n*n),		# 17: Z
-                    as.integer( n ),		# 18: LDZ
-                    WORK = double(8*n),		# 19: WORK
-                    as.integer( 8*n ),		# 20: LWORK
-                    IWORK = integer(5*n),	# 21: IWORK
-                    IFAIL = integer( n ),	# 22: IFAIL
-                    INFO = integer( 1 )		# 23: INFO
-             )
+    res <- .C( "dsygvx_c",
+              as.integer( n ),		# 5: N
+              as.double( A ), 		# 6: A
+              as.double( B ),		# 8: B
+              as.integer( n-nz+1 ),	# 12: IL
+              M = integer(1),		# 15: M
+              W = double(n),		# 16: W
+              Z = double(n*n),		# 17: Z
+              WORK = double(8*n),	# 19: WORK
+              IWORK = integer(5*n),	# 21: IWORK
+              IFAIL = integer( n ),	# 22: IFAIL
+              INFO = integer( 1 )	# 23: INFO
+              )
 
     if( res$INFO != 0 )
         stop( "Call to dsygvx() failed with error code ", res$INFO, "\n" )
