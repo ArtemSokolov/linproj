@@ -1,0 +1,9 @@
+Package: LDA
+Title: Linear Discriminant Analysis
+Version: 1.0
+Authors@R: person("Artem", "Sokolov", email = "artem.sokolov@gmail.com", role = c("aut", "cre"))
+Description: Finds directions in high-dimensional space that maximize the ratio of inter-class variance / within-class variance.
+Depends: R (>= 3.4.1)
+License: MIT License
+Encoding: UTF-8
+LazyData: true
