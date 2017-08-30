@@ -11,7 +11,7 @@
 #' @param B n-by-n matrix B.
 #' @param nz integer indicating the number of eigenvalues /-vectors to obtain. Defaults to n.
 #' @return A list with two elements. $d contains the eignavalues in decreasing order. $v contains the corresponding eigenvectors.
-#' @useDynLib LDA dsygvx_c
+#' @useDynLib linproj dsygvx_c
 #' @export
 gsep <- function( A, B, nz=nrow(A) )
 {

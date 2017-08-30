@@ -13,6 +13,7 @@
 #' @param formula an alternative way to specify the LDA model. See below for examples.
 #' @param data a data.frame associated with the formula-based model specification.
 #' @param lambda regularization parameter. Higher values lead to less overfitting and the cost of poorer separation between the classes. (Default: 0.1)
+#' @param ... further arguments passed to or from other methods
 #' @return An object of class LDA that contains variance quotients in $d and LDA component loadings in $v. See \code{tidy.LDA}, \code{glance.LDA} and \code{augment.LDA} for tidy downstream usage of the LDA object.
 #' @examples
 #' ## All of the following are equivalent ways to train an LDA model on the built-in iris dataset
@@ -28,7 +29,7 @@ LDA <- function( X, ... )
 
 #' @describeIn LDA accepts a data.frame and column index / name, or an external labels vector
 #' @export
-LDA.data.frame <- function( X, y, lambda = 0.1 )
+LDA.data.frame <- function( X, y, lambda = 0.1, ... )
 {
     ## Using a specific column as labels
     if( length(y) == 1 )
@@ -61,7 +62,7 @@ LDA.data.frame <- function( X, y, lambda = 0.1 )
 
 #' @describeIn LDA accepts a matrix and an external labels vector
 #' @export
-LDA.matrix <- function( X, y, lambda = 0.1 )
+LDA.matrix <- function( X, y, lambda = 0.1, ... )
 {
     res <- lda.bases( X, y, lambda )
     class( res ) <- "LDA"
@@ -70,10 +71,10 @@ LDA.matrix <- function( X, y, lambda = 0.1 )
 
 #' @describeIn LDA accepts a formula and the corresponding data.frame
 #' @export
-LDA.formula <- function( formula, data, lambda = 0.1 )
+LDA.formula <- function( formula, data, lambda = 0.1, ... )
 {
     ## Retrieve the formula terms and variable names
-    tt <- terms( formula, data = data )
+    tt <- stats::terms( formula, data = data )
     vv <- unlist( lapply( as.list( attr( tt, "variables" ) )[-1], deparse ) )
     
     ## Identify the response variable

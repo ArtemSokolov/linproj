@@ -1,10 +1,10 @@
-Package: LDA
-Title: Linear Discriminant Analysis
+Package: linproj
+Title: Linear Projections of High-Dimensional Datasets
 Version: 1.0
 Authors@R: person("Artem", "Sokolov", email = "artem.sokolov@gmail.com", role = c("aut", "cre"))
-Description: Finds directions in high-dimensional space that maximize the ratio of inter-class variance / within-class variance.
+Description: Methods for computing directions in high-dimensional spaces that maximize various variance ratios in the data.
 Depends: R (>= 3.4.1)
-License: MIT License
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1

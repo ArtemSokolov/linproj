@@ -1,2 +1,3 @@
-# LDA
-Linear Discriminant Analysis
+# linproj: Linear Projection Methods
+
+Current implementation: Linear Discriminant Analysis

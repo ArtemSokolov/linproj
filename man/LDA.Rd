@@ -9,14 +9,16 @@
 \usage{
 LDA(X, ...)
 
-\method{LDA}{data.frame}(X, y, lambda = 0.1)
+\method{LDA}{data.frame}(X, y, lambda = 0.1, ...)
 
-\method{LDA}{matrix}(X, y, lambda = 0.1)
+\method{LDA}{matrix}(X, y, lambda = 0.1, ...)
 
-\method{LDA}{formula}(formula, data, lambda = 0.1)
+\method{LDA}{formula}(formula, data, lambda = 0.1, ...)
 }
 \arguments{
 \item{X}{matrix or data.frame, where each row is a sample and each column is a feature.}
+
+\item{...}{further arguments passed to or from other methods}
 
 \item{y}{a vector of class labels with length equal to the number of rows in X. If X is a data.frame,
 y can also be an index (integer) or name (character) of the column to be used as labels.}
