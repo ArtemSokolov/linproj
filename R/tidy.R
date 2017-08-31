@@ -86,6 +86,13 @@ LDA.formula <- function( formula, data, lambda = 0.1, ... )
     LDA( data[,vv], r )
 }
 
+#' Implementation of broom::tidy() for LDA objects
+#'
+#' Produces a summary of an LDA object, expressed as a data.frame
+#' 
+#' @param L an LDA object, as produced by LDA()
+#' @return a data.frame with LDA component loadings
+#' @export
 tidy.LDA <- function( L )
 {
     X <- as.data.frame( L$v )
