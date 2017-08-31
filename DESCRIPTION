@@ -3,7 +3,7 @@ Title: Linear Projections of High-Dimensional Datasets
 Version: 1.0
 Authors@R: person("Artem", "Sokolov", email = "artem.sokolov@gmail.com", role = c("aut", "cre"))
 Description: Methods for computing directions in high-dimensional spaces that maximize various variance ratios in the data.
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.3.2)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
