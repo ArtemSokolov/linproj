@@ -15,3 +15,15 @@ a data.frame with LDA component loadings
 \description{
 Produces a summary of an LDA object, expressed as a data.frame
 }
+\examples{
+\dontrun{
+model <- LDA( Species ~ ., iris )
+broom::tidy( model )
+##       Feature      LDA1        LDA2
+## 1 Sepal.Length  0.626970 -0.01449191
+## 2  Sepal.Width  1.181041 -2.14917074
+## 3 Petal.Length -2.135565  0.52600987
+## 4  Petal.Width -1.828151 -1.89227871
+##  
+}
+}

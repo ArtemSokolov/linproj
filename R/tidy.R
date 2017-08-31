@@ -92,6 +92,17 @@ LDA.formula <- function( formula, data, lambda = 0.1, ... )
 #' 
 #' @param L an LDA object, as produced by LDA()
 #' @return a data.frame with LDA component loadings
+#' @examples
+#' \dontrun{
+#' model <- LDA( Species ~ ., iris )
+#' broom::tidy( model )
+#' ##       Feature      LDA1        LDA2
+#' ## 1 Sepal.Length  0.626970 -0.01449191
+#' ## 2  Sepal.Width  1.181041 -2.14917074
+#' ## 3 Petal.Length -2.135565  0.52600987
+#' ## 4  Petal.Width -1.828151 -1.89227871
+#' ##  
+#' }
 #' @export
 tidy.LDA <- function( L )
 {
@@ -101,6 +112,21 @@ tidy.LDA <- function( L )
     X
 }
 
+#' Implementation of broom::glance() for LDA objects
+#'
+#' Produces a one-line summary of an LDA object
+#'
+#' @param L an LDA object, as produced by LDA()
+#' @return a data.frame of eigenvalues from the associated generalized eigenvalue problem
+#' @examples
+#' \dontrun{
+#' model <- LDA( Species ~ ., iris )
+#' broom::glance( model )
+#' ##       VQ1       VQ2
+#' ## 1 23.42386 0.2167796
+#' ##
+#' }
+#' @export
 glance.LDA <- function( L )
 {
     X <- as.list( L$d )
@@ -108,6 +134,27 @@ glance.LDA <- function( L )
     as.data.frame(X)
 }
 
+#' Implementation of broom::augment() for LDA objects
+#'
+#' Augments a matrix or a data.frame with its projections onto the LDA components
+#'
+#' @param L an LDA object, as produced by LDA()
+#' @param newdata a matrix or a data.frame containing data to be projected onto the LDA components
+#' @return a data.frame of eigenvalues from the associated generalized eigenvalue problem
+#' @examples
+#' \dontrun{
+#' model <- LDA( Species ~ ., iris )
+#' head( broom::augment( model, iris ) )
+#' ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species     LDA1      LDA2
+#' ## 1          5.1         3.5          1.4         0.2  setosa 3.975771 -7.238048
+#' ## 2          4.9         3.0          1.4         0.2  setosa 3.259856 -6.160564
+#' ## 3          4.7         3.2          1.3         0.2  setosa 3.584227 -6.640101
+#' ## 4          4.6         3.1          1.5         0.2  setosa 2.976313 -6.318533
+#' ## 5          5.0         3.6          1.4         0.2  setosa 4.031178 -7.451516
+#' ## 6          5.4         3.9          1.7         0.4  setosa 3.629979 -8.322717
+#' ##
+#' }
+#' @export
 augment.LDA <- function( L, newdata )
 {
     ## Ensure the new data contains all the required variables
