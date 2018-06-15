@@ -83,7 +83,7 @@ LDA.formula <- function( formula, data, lambda = 0.1, ... )
         stop( "Please provide a response variable" )
 
     ## Route the call to LDA.data.frame
-    LDA( data[,vv], r )
+    LDA( data[,vv], r, lambda )
 }
 
 #' Implementation of broom::tidy() for LDA objects

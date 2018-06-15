@@ -94,6 +94,7 @@ lda.bases <- function( X, y, lambda = 0.1 )
 
     ## The within-cluster scatter has to be full rank
     ## Slightly whiten the matrix as necessary
+    cat( "Whitening within-cluster scatter with lambda =", lambda, "\n" )
     SW <- SW + lambda * max(abs(SW)) * diag(p)
 
     ## Compute the bases
